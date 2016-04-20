@@ -1,13 +1,13 @@
 var Player = function () {
     this.image = document.createElement("img");
     this.position = new Vector2();
-    this.position.set (9 * TILE, 0 * TILE);
+    this.position.Set (9 * TILE, 0 * TILE);
 
     this.width = 159;
     this.height = 163;
 
     this.offset = new Vector2();
-    this.offset.set(-55, -87);
+    this.offset.Set(-55, -87);
 
     this.velocity = new Vector2();
 
@@ -32,15 +32,15 @@ Player.prototype.update = function (deltaTime)
      var jump = false;
      
      //cehck keypress eventss
-     if(keyboard.isKeyDOwn(keyboard.KEY_LEFT) == true)
+     if(keyboard.isKeyDown(keyboard.KEY_LEFT) == true)
      {
          left = true;
      }
-     if(keyboard.isKeyDOwn(keyboard.KEY_RIGHT) == true)
+     if(keyboard.isKeyDown(keyboard.KEY_RIGHT) == true)
      {
          right = true;
      }
-     if(keyboard.isKeyDOwn(keyboard.KEY_SPACE) == true)
+     if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true)
      {
          jump = true;
      }
