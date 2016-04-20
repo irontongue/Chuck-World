@@ -142,12 +142,12 @@ function drawMap() {
 var chuckNorris = document.createElement("img");
 chuckNorris.src = "hero.png";
 
-var cells = {};  // this is the array that holds the simplified collision data
+var cells = [];  // this is the array that holds the simplified collision data
 function initialize() {
     for (var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++) {
         cells[layerIdx] = [];
         var idx = 0;
-        for(var y = 0; y < level1.layers[layerIdx].heeight; y++) {
+        for(var y = 0; y < level1.layers[layerIdx].height; y++) {
             cells[layerIdx][y] = [];
             for(var x = 0; x <level1.layers[layerIdx].width; x++) {
                 if(level1.layers[layerIdx].data[idx] != 0) {

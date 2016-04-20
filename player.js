@@ -10,7 +10,7 @@ var Player = function () {
     this.offset.Set(-55, -87);
 
     this.velocity = new Vector2();
-
+    this.velocity.Set(0);
     this.falling = true;
     this.jumping = false;
 
