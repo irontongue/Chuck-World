@@ -1,3 +1,7 @@
+var LAYER_COUNT = 3;
+var LAYER_BACKGROUND = 0;
+var LAYER_PLATFORMS = 1;
+var LAYER_LADDERS = 2;
 var level1= 
 { "height":15,
  "layers":[

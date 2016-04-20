@@ -51,10 +51,67 @@ var fpsTime = 0;
 
 var player = new Player();
 var keyboard = new Keyboard();
+// abitrary choice for 1m
+var METER = TILE;
+// exaggerated gravity (6x)
+var GRAVITY = METER * 9.8 * 6
+// max horizontal speeeeed (10 tiles per second)
+var MAXDX = METER * 10;
+//max  vertical speed  (15 t ps)
+var MAXDY = METER * 15; 
+// horizontal acceleration - take 1/2 sec to reach maxdx
+var ACCEL = MAXDX * 2;
+// horizontal friction - take 1/6 sec to stop from maxdx
+var FRICTION = MAXDX * 6
+// a large instant jump impulse
+var JUMP = METER * 1500;
 
 //loads the image to use for thee level tiles
 var tileset = document.createElement("img");
 tileset.src = "tileset.png";
+
+
+
+function cellAtPixelCoord(layer, x,y)
+{
+    if(x<0  || x>SCREEN_WIDTH)
+    return 1;
+    // let the player drop of the bottom of the screen (aka DEATH)
+    if(y>SCREEN_HEIGHT)
+    return 0;
+    return cellAtTileCoord(layer, p2t(x), p2t(y));
+};
+
+function cellAtTileCoord(layer, tx, ty)
+{
+    if(tx<0 || tx>=MAP.tw)
+    return 1;
+    // let the player drop of the screen (again meaning DEATH)
+    if(ty>=MAP.th)
+    return 0;
+    return cells[layer][ty][tx];
+};
+
+function tileToPixel(tile)
+{
+    return tile * TILE;
+};
+
+function pixelToTile(pixel)
+{
+    return Math.floor(pixel/TILE);
+};
+
+function bound(value, min, max)
+{
+    if(value < min)
+    return min;
+    if(value > max)
+    return max;
+    return value;
+}
+
+
 
 
 function drawMap() {
@@ -85,6 +142,31 @@ function drawMap() {
 var chuckNorris = document.createElement("img");
 chuckNorris.src = "hero.png";
 
+var cells = {};  // this is the array that holds the simplified collision data
+function initialize() {
+    for (var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++) {
+        cells[layerIdx] = [];
+        var idx = 0;
+        for(var y = 0; y < level1.layers[layerIdx].heeight; y++) {
+            cells[layerIdx][y] = [];
+            for(var x = 0; x <level1.layers[layerIdx].width; x++) {
+                if(level1.layers[layerIdx].data[idx] != 0) {
+                    cells[layerIdx][y][x] = 1;
+                    cells[layerIdx][y-1][x] = 1;
+                    cells[layerIdx][y-1][x+1] = 1;
+                    cells[layerIdx][y][x+1] =1 ;
+                    
+                }
+                else if(cells[layerIdx][y][x] != 1) {
+                    cells[layerIdx][y][x] = 0;
+                }
+                idx++;
+            }
+        }
+    }
+}
+
+
 
 
 function run() {
@@ -110,6 +192,7 @@ function run() {
     context.fillText("FPS: " + fps, 5, 20, 100);
 }
 
+initialize();
 
 //-------------------- Don't modify anything below here
 
