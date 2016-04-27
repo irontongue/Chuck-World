@@ -82,7 +82,7 @@ var Player = function () {
          {
              this.velocity.x = 0;
          }
-
+    // collision detection
     var tx = pixelToTile(this.position.x);
     var ty = pixelToTile(this.position.y);
     
@@ -132,7 +132,7 @@ var Player = function () {
 Player.prototype.draw = function()
 {
 	    context.save();			
-		context.translate(this.x, this.y);
-		context.drawImage(this.image, -this.width/2, -this.height/2);	
+		context.translate(this.position.x, this.position.y);
+		context.drawImage(this.image, 0,0);	
 	    context.restore();	
 }
