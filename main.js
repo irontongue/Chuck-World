@@ -113,7 +113,6 @@ function bound(value, min, max)
 
 
 
-
 function drawMap() {
     for (var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++) 
     {
@@ -165,7 +164,6 @@ function initialize() {
         }
     }
 }
-
 
 
 
