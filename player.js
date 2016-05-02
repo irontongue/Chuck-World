@@ -73,11 +73,10 @@ var Player = function () {
      
     this.position.y = Math.floor(this.position.y + (deltaTime * this.velocity.y));
     this.position.x = Math.floor(this.position.x + (deltaTime * this.velocity.x));
-   
-    this.position.x = bound(this.velocity.x + (deltaTime * ddx), -MAXDX, MAXDX);
-    this.position.y = bound(this.velocity.y + (deltaTime * ddy), -MAXDY, MAXDY)
+    this.velocity.x = bound(this.velocity.x + (deltaTime * ddx), -MAXDX, MAXDX);
+    this.velocity.y = bound(this.velocity.y + (deltaTime * ddy), -MAXDY, MAXDY)
      
-     if ((wasleft && (this. velocity.x > 0))||
+     if ((wasleft && (this.velocity.x > 0))||
          (wasright && (this.velocity.x < 0)))
          {
              this.velocity.x = 0;

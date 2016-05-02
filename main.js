@@ -31,7 +31,7 @@ function getDeltaTime() {
 var SCREEN_WIDTH = canvas.width;
 var SCREEN_HEIGHT = canvas.height;
 
-var LAYER_COUNT = 3; // The number of layers in the map
+var LAYER_COUNT = 2; // The number of layers in the map
 var MAP = {tw: 60, th: 15 }; // How big the level is (in tiles)
 var TILE = 35 // the width and height of a tile (in pixels)
 var TILESET_TILE = TILE * 2 // width and height of a tile in the tileset
@@ -69,6 +69,7 @@ var JUMP = METER * 1500;
 //loads the image to use for thee level tiles
 var tileset = document.createElement("img");
 tileset.src = "tileset.png";
+
 
 
 
@@ -173,7 +174,7 @@ function run() {
     var deltaTime = getDeltaTime();
     
     drawMap();
-    
+    //DrawLevelCollisionData();
     player.update(deltaTime);
     player.draw();
     // update the frame counter
@@ -192,6 +193,17 @@ function run() {
 
 initialize();
 
+/*function DrawLevelCollisionData(tileLayer) {
+    for (var y = 0; y < level1.layers[tileLayer].height; y++) {
+        for (var x = 0; x < level1.layers[tileLayer].width; x++) {
+            if (cells[tileLayer][y][x] == 1) {
+                context.fillStyle = "#F00";
+                context.fillRect(TILE * x, TILE * y, TILE, TILE);
+            }
+        }
+    }
+}
+*/
 //-------------------- Don't modify anything below here
 
 
