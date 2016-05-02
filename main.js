@@ -174,7 +174,7 @@ function run() {
     var deltaTime = getDeltaTime();
     
     drawMap();
-    //DrawLevelCollisionData();
+   // DrawLevelCollisionData(1);
     player.update(deltaTime);
     player.draw();
     // update the frame counter
@@ -192,8 +192,8 @@ function run() {
 }
 
 initialize();
-
-/*function DrawLevelCollisionData(tileLayer) {
+/*
+function DrawLevelCollisionData(tileLayer) {
     for (var y = 0; y < level1.layers[tileLayer].height; y++) {
         for (var x = 0; x < level1.layers[tileLayer].width; x++) {
             if (cells[tileLayer][y][x] == 1) {
@@ -203,7 +203,9 @@ initialize();
         }
     }
 }
-*/
+
+*/ 
+
 //-------------------- Don't modify anything below here
 
 

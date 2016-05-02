@@ -132,6 +132,8 @@ Player.prototype.draw = function()
 {
 	    context.save();			
 		context.translate(this.position.x, this.position.y);
-		context.drawImage(this.image, 0,0);	
-	    context.restore();	
+		context.drawImage(this.image, -55,-90);	
+	    context.restore();
+        context.fillStyle = '#0000ff'	
+       // context.fillRect(player.position.x, player.position.y, 35, 35)
 }
