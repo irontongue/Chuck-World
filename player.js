@@ -16,7 +16,7 @@ var Player = function ()
     
     for(var i=0; i<ANIM_MAX; i++)
     {
-        this.sprite.setAnimationOffset(i, -55, -87);
+        this.sprite.setAnimationOffset(i, -75, -89);
         
     }
     
@@ -39,8 +39,8 @@ var LEFT = 0;
 var RIGHT = 1;
 
 var ANIM_IDLE_LEFT = 0;
-var ANIM_JUMP_LEFT = 0;
-var ANIM_WALK_LEFT = 0;
+var ANIM_JUMP_LEFT = 1;
+var ANIM_WALK_LEFT = 2;
 var ANIM_IDLE_RIGHT = 3;
 var ANIM_JUMP_RIGHT = 4;
 var ANIM_WALK_RIGHT = 5;
@@ -64,17 +64,45 @@ var ANIM_MAX = 6;
      var jump = false;
      
      //cehck keypress eventss
-     if(keyboard.isKeyDown(keyboard.KEY_LEFT) == true)
-     {
+     if (keyboard.isKeyDown(keyboard.KEY_LEFT) == true) {
          left = true;
+         this.direction = LEFT;
+         if (this.sprite.currentAnimation != ANIM_WALK_LEFT)
+             this.sprite.setAnimation(ANIM_WALK_LEFT);
+             console.log ("WORKS")
      }
-     if(keyboard.isKeyDown(keyboard.KEY_RIGHT) == true)
-     {
+     else if (keyboard.isKeyDown(keyboard.KEY_RIGHT) == true) {
          right = true;
+         this.direction = RIGHT;
+         if (this.sprite.currentAnimation != ANIM_WALK_RIGHT)
+             this.sprite.setAnimation(ANIM_WALK_RIGHT);
+             console.log("WOKRS2")
+     }
+     else {
+         if (this.jumping == false && this.falling == false) {
+              {
+                 if (this.direcition == LEFT) {
+                     if (this.sprite.currentAnimation != ANIM_IDLE_LEFT)
+                         this.sprite.setAnimation(ANIM_IDLE_LEFT);
+                 }
+                 else 
+                 {
+                     if (this.sprite.currentAnimation != ANIM_IDLE_RIGHT)
+                         this.sprite.setAnimation(ANIM_IDLE_RIGHT)
+
+                 }
+             }
+         }
      }
      if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true)
      {
          jump = true;
+         if(left == true) {
+             this.sprite.setAnimation(ANIM_JUMP_LEFT);
+         }
+         if(right == true) {
+             this.sprite.setAnimation(ANIM_JUMP_RIGHT);
+         }
      }
      
      var wasleft = this.velocity.x < 0;
@@ -96,8 +124,18 @@ var ANIM_MAX = 6;
      
      if (jump && !this.jumping && !falling)
      {
+         // apply an instantaneous (large) vertical impulse
          ddy = ddy - JUMP;
          this.jumping = true;
+         if(this.direcition == LEFT)
+         this.sprite.setAnimation(ANIM_JUMP_LEFT)
+         else
+         this.sprite.setAnimation(ANIM_JUMP_RIGHT)
+     }
+     {
+         ddy = ddy - JUMP;
+         this.jumping = true;
+         
      }
      
     this.position.y = Math.floor(this.position.y + (deltaTime * this.velocity.y));
@@ -159,11 +197,11 @@ var ANIM_MAX = 6;
 
 Player.prototype.draw = function()
 {
-	    context.save();			
+	/*    context.save();			
 		context.translate(this.position.x, this.position.y);
 		context.drawImage(this.image, -50,-90);	
 	    context.restore();
-        this.sprite.draw(context, this.position.x, this.position.y);
-       // context.fillStyle = '#0000ff'	
-       // context.fillRect(player.position.x, player.position.y, 35, 35)
+      */  this.sprite.draw(context, this.position.x, this.position.y);
+        context.fillStyle = '#0000ff'	
+        context.fillRect(player.position.x, player.position.y, 35, 35)
 }
