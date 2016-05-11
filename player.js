@@ -64,22 +64,22 @@ var ANIM_MAX = 6;
      var jump = false;
      
      //cehck keypress eventss
-     if (keyboard.isKeyDown(keyboard.KEY_LEFT) == true) {
+     if(keyboard.isKeyDown(keyboard.KEY_LEFT) == true) {
          left = true;
          this.direction = LEFT;
          if (this.sprite.currentAnimation != ANIM_WALK_LEFT)
              this.sprite.setAnimation(ANIM_WALK_LEFT);
-             console.log ("WORKS")
+             
      }
-     else if (keyboard.isKeyDown(keyboard.KEY_RIGHT) == true) {
+     else if(keyboard.isKeyDown(keyboard.KEY_RIGHT) == true) {
          right = true;
          this.direction = RIGHT;
          if (this.sprite.currentAnimation != ANIM_WALK_RIGHT)
              this.sprite.setAnimation(ANIM_WALK_RIGHT);
-             console.log("WOKRS2")
+             
      }
      else {
-         if (this.jumping == false && this.falling == false) {
+         if (this.jumping == false && this.falling == false) 
               {
                  if (this.direcition == LEFT) {
                      if (this.sprite.currentAnimation != ANIM_IDLE_LEFT)
@@ -92,7 +92,7 @@ var ANIM_MAX = 6;
 
                  }
              }
-         }
+         
      }
      if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true)
      {
@@ -110,6 +110,11 @@ var ANIM_MAX = 6;
              this.jumping == false)
              this.sprite.setAnimation(ANIM_WALK_RIGHT);
          }
+     }
+     
+     if(left == true)
+     {
+         console.log("left")
      }
      
      var wasleft = this.velocity.x < 0;
@@ -139,12 +144,7 @@ var ANIM_MAX = 6;
          else
          this.sprite.setAnimation(ANIM_JUMP_RIGHT)
      }
-     {
-         ddy = ddy - JUMP;
-         this.jumping = true;
-         
-     }
-     
+    
     this.position.y = Math.floor(this.position.y + (deltaTime * this.velocity.y));
     this.position.x = Math.floor(this.position.x + (deltaTime * this.velocity.x));
     this.velocity.x = bound(this.velocity.x + (deltaTime * ddx), -MAXDX, MAXDX);
@@ -210,5 +210,5 @@ Player.prototype.draw = function()
 	    context.restore();
       */  this.sprite.draw(context, this.position.x, this.position.y);
         context.fillStyle = '#0000ff'	
-        context.fillRect(player.position.x, player.position.y, 35, 35)
+    //    context.fillRect(player.position.x, player.position.y, 35, 35)
 }

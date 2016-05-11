@@ -90,7 +90,7 @@ function cellAtTileCoord(layer, tx, ty)
     // let the player drop of the screen (again meaning DEATH)
     if(ty>=MAP.th)
     return 0;
-    return cells[layer][tx][ty];
+    return cells[layer][ty][tx];
 };
 
 function tileToPixel(tile)
@@ -174,7 +174,7 @@ function run() {
     var deltaTime = getDeltaTime();
     
     drawMap();
-   // DrawLevelCollisionData(1);
+  // DrawLevelCollisionData(1);
     player.update(deltaTime);
     player.draw();
     // update the frame counter
@@ -192,7 +192,7 @@ function run() {
 }
 
 initialize();
-/*
+
 function DrawLevelCollisionData(tileLayer) {
     for (var y = 0; y < level1.layers[tileLayer].height; y++) {
         for (var x = 0; x < level1.layers[tileLayer].width; x++) {
@@ -204,7 +204,7 @@ function DrawLevelCollisionData(tileLayer) {
     }
 }
 
-*/ 
+
 
 //-------------------- Don't modify anything below here
 
