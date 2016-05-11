@@ -103,6 +103,13 @@ var ANIM_MAX = 6;
          if(right == true) {
              this.sprite.setAnimation(ANIM_JUMP_RIGHT);
          }
+         else if (keyboard.isKeyDown(keyboard.KEY_RIGHT) == true) {
+             right =true;
+             this.direction = RIGHT;
+             if(this.sprite.currentAnimation != ANIM_WALK_RIGHT &&
+             this.jumping == false)
+             this.sprite.setAnimation(ANIM_WALK_RIGHT);
+         }
      }
      
      var wasleft = this.velocity.x < 0;
