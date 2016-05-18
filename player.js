@@ -31,7 +31,7 @@ var Player = function ()
     this.falling = true;
     this.jumping = false;
 
-    
+    this.cooldownTimer = 0;
 };
 
 
@@ -64,6 +64,18 @@ var ANIM_MAX = 6;
      var jump = false;
      
      //cehck keypress eventss
+     if(keyboard.isKeyDown(keyboard.KEY_UP) == true){
+         jump = true;
+     }
+     if(this.cooldownTimer){
+        this.cooldownTimer-= deltaTime;
+     }
+     if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true && this.cooldownTimer <=0){
+         sfxFire.play();
+         this.cooldownTimer = 0.6;
+         //SHOOTS BULLET
+     }
+      
      if(keyboard.isKeyDown(keyboard.KEY_LEFT) == true) {
          left = true;
          this.direction = LEFT;
@@ -81,7 +93,7 @@ var ANIM_MAX = 6;
      else {
          if (this.jumping == false && this.falling == false) 
               {
-                 if (this.direcition == LEFT) {
+                 if (this.direction == LEFT) {
                      if (this.sprite.currentAnimation != ANIM_IDLE_LEFT)
                          this.sprite.setAnimation(ANIM_IDLE_LEFT);
                  }
@@ -96,6 +108,7 @@ var ANIM_MAX = 6;
      }
      if(keyboard.isKeyDown(keyboard.KEY_SPACE) == true)
      {
+        
          jump = true;
          if(left == true) {
              this.sprite.setAnimation(ANIM_JUMP_LEFT);
@@ -112,11 +125,7 @@ var ANIM_MAX = 6;
          }
      }
      
-     if(left == true)
-     {
-         console.log("left")
-     }
-     
+
      var wasleft = this.velocity.x < 0;
      var wasright = this.velocity.x > 0;
      var falling = this.falling;
@@ -198,17 +207,20 @@ var ANIM_MAX = 6;
             this.velocity.x = 0;
         }
     }
+    if(cellAtTileCoord (LAYER_OBJECT_TRIGGERS, tx, ty) == true)
+    {
+         gameState == 4;
+    }
+    
  }
  
 
 
 Player.prototype.draw = function()
 {
-	/*    context.save();			
-		context.translate(this.position.x, this.position.y);
-		context.drawImage(this.image, -50,-90);	
-	    context.restore();
-      */  this.sprite.draw(context, this.position.x, this.position.y);
-        context.fillStyle = '#0000ff'	
-    //    context.fillRect(player.position.x, player.position.y, 35, 35)
+  
+	this.sprite.draw(context,
+    this.position.x - worldOffsetX,
+    this.position.y);
+   
 }
