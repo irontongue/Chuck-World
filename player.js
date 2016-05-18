@@ -207,10 +207,7 @@ var ANIM_MAX = 6;
             this.velocity.x = 0;
         }
     }
-    if(cellAtTileCoord (LAYER_OBJECT_TRIGGERS, tx, ty) == true)
-    {
-         gameState == 4;
-    }
+    
     
  }
  

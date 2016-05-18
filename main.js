@@ -38,7 +38,7 @@ var ENEMY_ACCEL = ENEMY_MAXDX * 2;
 
 var enemies = [];
 
-var LAYER_COUNT = 3; // The number of layers in the map
+var LAYER_COUNT = 5; // The number of layers in the map
 var LAYER_BACKGROUND = 0;
 var LAYER_PLATFORMS = 1;
 var LAYER_LADDERS = 2
@@ -96,6 +96,8 @@ tileset.src = "tileset.png";
 var musicBackground;
 var sfxFire;
 
+var heart = document.createElement("img");
+heart.src = "heart.png";
 
 function cellAtPixelCoord(layer, x,y)
 {
@@ -189,21 +191,9 @@ var cells = [];  // this is the array that holds the simplified collision data
 function initialize() {
     for (var layerIdx = 0; layerIdx < LAYER_COUNT; layerIdx++) {
         cells[layerIdx] = [];
-        cells[LAYER_OBJECT_TRIGGERS] = [];
+      
         var idx = 0;
         
-        for(var y = 0; y < level1.layers[LAYER_OBJECT_TRIGGERS].height; y++) {
-                cells[LAYER_OBJECT_TRIGGERS][y] = [];
-                for(var x = 0; x < level1.layers[LAYER_OBJECT_TRIGGERS].width; x++) {
-                        if(level1.layers[LAYER_OBJECT_TRIGGERS].data[idx] != 0) {
-                            cells[LAYER_OBJECT_TRIGGERS][y][x] = 1;
-                            cells[LAYER_OBJECT_TRIGGERS][y-1][x] = 1;
-                            cells[LAYER_OBJECT_TRIGGERS][y-1][x+1] = 1;
-                            cells[LAYER_OBJECT_TRIGGERS][y][x+1] = 1;
-                         }
-                         else if(cells[LAYER_OBJECT_TRIGGERS][y][x] != 1) {
-                         cells[LAYER_OBJECT_TRIGGERS][y][x] = 0;
-                         }
         for(var y = 0; y < level1.layers[layerIdx].height; y++) {
             cells[layerIdx][y] = [];
             for(var x = 0; x <level1.layers[layerIdx].width; x++) {
@@ -232,6 +222,7 @@ function initialize() {
             }
         }
     }
+
     musicBackground = new Howl({
         urls:["background.ogg"],
         loop: true,
@@ -341,13 +332,13 @@ function run() {
     var scoreText = + score;
     context.fillText(scoreText, 60, 50)
     
-    //lives
-    for(var i=0; i<lives; i++)
+    
+  for(var i=0; i<lives; i++)
     {
-   //   context.drawImage(heart, 20 + ((heart.width+2)*i), 10);
+      context.drawImage(this.heart, 20 + ((80)*i), 10, 60, 60);
     }
  
- 
+
 }
 
 
