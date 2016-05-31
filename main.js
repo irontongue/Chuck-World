@@ -56,7 +56,7 @@ var TILESET_COUNT_Y = 14; // rows of tile images in the tilemap
 var TestEnemy
 
 //hud var
-var score = 0;
+var score = 1500;
 var lives = 3;
 
 // some variables to calculate the Frames Per Second (FPS - this tells use
@@ -98,6 +98,8 @@ var sfxFire;
 
 var heart = document.createElement("img");
 heart.src = "heart.png";
+var skull = document.createElement("img");
+skull.src = "sk.png";
 
 function cellAtPixelCoord(layer, x,y)
 {
@@ -249,14 +251,14 @@ function initialize() {
 
 function runSplash(deltaTime)
 {
-    score = 0;
+    
     splashTimer -= deltaTime;
     if(splashTimer <= 0)
     {
         gameState = STATE_GAME;
         return;
     }
-    context.fillSyle = "#000";
+    context.fillStyle = "#000";
     context.font="24px Arial";
     context.fillText("Get Ready, Starting Game", 200, 240);
 }
@@ -279,15 +281,19 @@ function runGame(deltaTime)
 
 function runGameOver(deltaTime)
 {
-    context.fillStyle = "black";
-    context.fillText("Game Over", 200, 240);
-    context.fillText("Score ="+score.toString(), 30, 30);
+    context.fillStyle = "black"
+    context.fillRect(0,0,SCREEN_WIDTH, SCREEN_HEIGHT)
+    context.fillStyle = "red";
+    context.font="60px Arial"
+    context.fillText("FAILURE", 200, 240);
+  
 }
 function runWin(deltaTime)
 {
-    context.fillStyle = "black";
+    context.fillStyle = "blue";
+    context.font="50px Arial"
     context.fillText("You Win!", 200, 240);
-    context.fillText("score ="+score.toString(), 30, 30)
+   
 }
 
 
@@ -330,15 +336,14 @@ function run() {
      context.fillStyle = "purple"
     context.font="16px Arial";
     var scoreText = + score;
-    context.fillText(scoreText, 60, 50)
+    context.fillText(scoreText, 60, 100)
     
     
   for(var i=0; i<lives; i++)
     {
       context.drawImage(this.heart, 20 + ((80)*i), 10, 60, 60);
     }
- 
-
+   context.drawImage(this.skull, 20,75,40,40)
 }
 
 

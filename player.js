@@ -159,6 +159,24 @@ var ANIM_MAX = 6;
     this.velocity.x = bound(this.velocity.x + (deltaTime * ddx), -MAXDX, MAXDX);
     this.velocity.y = bound(this.velocity.y + (deltaTime * ddy), -MAXDY, MAXDY)
      
+      if(this.position.x > 2020)
+ {
+     gameState = 3
+ };
+ if(this.position.y > 550 && lives < 1)
+ {
+     gameState = 2
+ };
+ if(this.position.y > 550)
+ {
+     lives --
+     this.position.x = 311;
+     this.position.y = 100;
+     score --;
+ };
+ 
+
+     
      if ((wasleft && (this.velocity.x > 0))||
          (wasright && (this.velocity.x < 0)))
          {
@@ -210,7 +228,6 @@ var ANIM_MAX = 6;
     
     
  }
- 
 
 
 Player.prototype.draw = function()
